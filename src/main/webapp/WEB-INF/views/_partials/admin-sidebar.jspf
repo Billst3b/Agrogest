@@ -1,0 +1,17 @@
+<%-- Sidebar do admin. Antes do include: <c:set var="ativo" value="produtos"/> --%>
+<c:set var="ctx" value="${pageContext.request.contextPath}"/>
+<aside class="sidebar">
+    <a class="marca" href="${ctx}/admin/dashboard"><span class="logo">&#x1F33E;</span> AgroGest</a>
+    <a class="item ${ativo == 'dashboard' ? 'ativo' : ''}" href="${ctx}/admin/dashboard"><span class="ico">&#x1F4CA;</span> Dashboard</a>
+    <a class="item ${ativo == 'fornecedores' ? 'ativo' : ''}" href="${ctx}/admin/fornecedores"><span class="ico">&#x1F69A;</span> Fornecedores</a>
+    <a class="item ${ativo == 'produtos' ? 'ativo' : ''}" href="${ctx}/admin/produtos"><span class="ico">&#x1F4E6;</span> Produtos</a>
+    <a class="item ${ativo == 'campanhas' ? 'ativo' : ''}" href="${ctx}/admin/campanhas"><span class="ico">&#x1F4C5;</span> Campanhas</a>
+    <a class="item ${ativo == 'cultivos' ? 'ativo' : ''}" href="${ctx}/admin/cultivos"><span class="ico">&#x1F331;</span> Cultivos</a>
+    <a class="item ${ativo == 'colheitas' ? 'ativo' : ''}" href="${ctx}/admin/colheitas"><span class="ico">&#x1F9FA;</span> Colheitas</a>
+    <a class="item ${ativo == 'vendas' ? 'ativo' : ''}" href="${ctx}/admin/vendas"><span class="ico">&#x1F9FE;</span> Vendas</a>
+    <a class="item ${ativo == 'relatorios' ? 'ativo' : ''}" href="${ctx}/admin/relatorios"><span class="ico">&#x1F4C8;</span> Relatórios</a>
+    <div class="rodape">
+        <div class="quem">Sessão: <c:out value="${sessionScope.nome}"/></div>
+        <a class="item" href="${ctx}/logout"><span class="ico">↩</span> Sair</a>
+    </div>
+</aside>

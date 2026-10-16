@@ -1,0 +1,12 @@
+target/
+*.class
+*.war
+*.ser
+*.tar.gz
+tomcat*/
+.idea/
+*.iml
+.vscode/
+.settings/
+.classpath
+.project

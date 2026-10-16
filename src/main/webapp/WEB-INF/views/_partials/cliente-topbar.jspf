@@ -1,0 +1,14 @@
+<%-- Barra superior do cliente. Antes do include: <c:set var="ativo" value="catalogo"/> --%>
+<c:set var="ctx" value="${pageContext.request.contextPath}"/>
+<header class="topbar">
+    <div class="inner">
+        <a class="marca" href="${ctx}/catalogo"><span class="logo">&#x1F33E;</span> AgroGest</a>
+        <nav>
+            <span class="ola">Olá, <c:out value="${sessionScope.nome}"/></span>
+            <a class="${ativo == 'catalogo' ? 'ativo' : ''}" href="${ctx}/catalogo">Catálogo</a>
+            <a class="${ativo == 'carrinho' ? 'ativo' : ''}" href="${ctx}/carrinho">&#x1F6D2; Carrinho<c:if test="${not empty sessionScope.carrinho}"> <span class="badge">${sessionScope.carrinho.size()}</span></c:if></a>
+            <a class="${ativo == 'compras' ? 'ativo' : ''}" href="${ctx}/minhas-compras">Minhas Compras</a>
+            <a href="${ctx}/logout">Sair</a>
+        </nav>
+    </div>
+</header>

@@ -5,7 +5,7 @@
 <head><%@ include file="/WEB-INF/views/_partials/head.jspf" %><title>Entrar — AgroGest</title></head>
 <body class="centro">
 <section class="hero">
-    <span class="marca"><span class="logo">&#x1F33E;</span> AgroGest</span>
+    <span class="marca"><span class="logo"><span class="i i-folha"></span></span> AgroGest</span>
     <div>
         <h2>Gestão agrícola, do campo à factura.</h2>
         <p>Sementes, fertilizantes e maquinaria — campanhas, cultivos e colheitas num só lugar.</p>

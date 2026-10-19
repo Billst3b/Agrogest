@@ -5,7 +5,7 @@
 <head><%@ include file="/WEB-INF/views/_partials/head.jspf" %><title>Criar conta — AgroGest</title></head>
 <body class="centro">
 <section class="hero">
-    <span class="marca"><span class="logo">&#x1F33E;</span> AgroGest</span>
+    <span class="marca"><span class="logo"><span class="i i-folha"></span></span> AgroGest</span>
     <div>
         <h2>Compre insumos agrícolas com facilidade.</h2>
         <p>Crie a sua conta de cliente para consultar o catálogo, encomendar e receber a factura no momento.</p>

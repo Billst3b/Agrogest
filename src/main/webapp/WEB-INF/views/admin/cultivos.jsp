@@ -28,7 +28,7 @@
 </section>
 <section class="painel sem-padding">
 <c:choose>
-<c:when test="${empty cultivos}"><div class="vazio"><div class="ico">&#x1F331;</div><p>Nenhum cultivo registado.</p></div></c:when>
+<c:when test="${empty cultivos}"><div class="vazio"><div class="ico"><span class="i i-rebento"></span></div><p>Nenhum cultivo registado.</p></div></c:when>
 <c:otherwise><div class="tabela-wrap">
 <table><thead><tr><th>ID</th><th>Campanha</th><th>Cultura</th><th>Variedade</th><th class="num">Hectares</th><th>Plantio</th><th></th></tr></thead><tbody>
 <c:forEach var="cu" items="${cultivos}"><tr>

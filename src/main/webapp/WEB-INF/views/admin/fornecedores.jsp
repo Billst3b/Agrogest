@@ -22,7 +22,7 @@
 </section>
 <section class="painel sem-padding">
 <c:choose>
-<c:when test="${empty fornecedores}"><div class="vazio"><div class="ico">&#x1F69A;</div><p>Nenhum fornecedor registado.</p></div></c:when>
+<c:when test="${empty fornecedores}"><div class="vazio"><div class="ico"><span class="i i-camiao"></span></div><p>Nenhum fornecedor registado.</p></div></c:when>
 <c:otherwise><div class="tabela-wrap">
 <table><thead><tr><th>ID</th><th>Nome</th><th>Tipo</th><th>Contacto</th><th>Província</th><th></th></tr></thead><tbody>
 <c:forEach var="f" items="${fornecedores}"><tr>

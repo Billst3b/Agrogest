@@ -27,7 +27,7 @@
 </section>
 <section class="painel sem-padding">
 <c:choose>
-<c:when test="${empty produtos}"><div class="vazio"><div class="ico">&#x1F4E6;</div><p>Nenhum produto registado.</p></div></c:when>
+<c:when test="${empty produtos}"><div class="vazio"><div class="ico"><span class="i i-caixa"></span></div><p>Nenhum produto registado.</p></div></c:when>
 <c:otherwise><div class="tabela-wrap">
 <table><thead><tr><th>ID</th><th>Nome</th><th>Categoria</th><th>Fornecedor</th><th class="num">Preço</th><th class="num">Stock</th><th class="num">Ações</th></tr></thead><tbody>
 <c:forEach var="p" items="${produtos}"><tr>

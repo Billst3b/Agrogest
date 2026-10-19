@@ -9,7 +9,7 @@
 <div class="factura">
     <div class="topo">
         <div>
-            <span class="marca"><span class="logo">&#x1F33E;</span> AgroGest</span>
+            <span class="marca"><span class="logo"><span class="i i-folha"></span></span> AgroGest</span>
             <p class="muted" style="margin:8px 0 0">Insumos e gestão agrícola</p>
         </div>
         <div class="numero">
@@ -46,7 +46,7 @@
             <c:when test="${sessionScope.perfil == 'ADMIN'}"><a class="botao secundario" href="${ctx}/admin/vendas">← Voltar às vendas</a></c:when>
             <c:otherwise><a class="botao secundario" href="${ctx}/minhas-compras">← Minhas compras</a></c:otherwise>
         </c:choose>
-        <button onclick="window.print()">&#x1F5A8;️ Imprimir</button>
+        <button onclick="window.print()"><span class="i i-impressora"></span> Imprimir</button>
     </div>
 </div>
 </body></html>

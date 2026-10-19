@@ -14,14 +14,14 @@
 <c:set var="catSel" value="${param.categoria}"/>
 <nav class="filtros" aria-label="Filtrar por categoria">
     <a class="chip ${empty catSel ? 'ativo' : ''}" href="${ctx}/catalogo">Todas</a>
-    <a class="chip ${catSel == 'SEMENTE' ? 'ativo' : ''}" href="${ctx}/catalogo?categoria=SEMENTE">&#x1F331; Sementes</a>
-    <a class="chip ${catSel == 'FERTILIZANTE' ? 'ativo' : ''}" href="${ctx}/catalogo?categoria=FERTILIZANTE">&#x1F9EA; Fertilizantes</a>
-    <a class="chip ${catSel == 'MAQUINARIA' ? 'ativo' : ''}" href="${ctx}/catalogo?categoria=MAQUINARIA">&#x1F69C; Maquinaria</a>
-    <a class="chip ${catSel == 'FERRAMENTA' ? 'ativo' : ''}" href="${ctx}/catalogo?categoria=FERRAMENTA">&#x1F6E0;️ Ferramentas</a>
+    <a class="chip ${catSel == 'SEMENTE' ? 'ativo' : ''}" href="${ctx}/catalogo?categoria=SEMENTE">Sementes</a>
+    <a class="chip ${catSel == 'FERTILIZANTE' ? 'ativo' : ''}" href="${ctx}/catalogo?categoria=FERTILIZANTE">Fertilizantes</a>
+    <a class="chip ${catSel == 'MAQUINARIA' ? 'ativo' : ''}" href="${ctx}/catalogo?categoria=MAQUINARIA">Maquinaria</a>
+    <a class="chip ${catSel == 'FERRAMENTA' ? 'ativo' : ''}" href="${ctx}/catalogo?categoria=FERRAMENTA">Ferramentas</a>
 </nav>
 <c:choose>
 <c:when test="${empty produtos}">
-    <div class="painel vazio"><div class="ico">&#x1F4ED;</div><p>Não há produtos disponíveis nesta categoria.</p>
+    <div class="painel vazio"><div class="ico"><span class="i i-caixa"></span></div><p>Não há produtos disponíveis nesta categoria.</p>
         <a class="botao secundario" href="${ctx}/catalogo">Ver todos</a></div>
 </c:when>
 <c:otherwise>
@@ -31,10 +31,10 @@
         <div class="foto">
             <c:choose>
                 <c:when test="${not empty p.fotoUrl}"><img src="<c:out value='${p.fotoUrl}'/>" alt="<c:out value='${p.nome}'/>" loading="lazy"></c:when>
-                <c:when test="${p.categoria == 'SEMENTE'}">&#x1F331;</c:when>
-                <c:when test="${p.categoria == 'FERTILIZANTE'}">&#x1F9EA;</c:when>
-                <c:when test="${p.categoria == 'MAQUINARIA'}">&#x1F69C;</c:when>
-                <c:otherwise>&#x1F6E0;&#xFE0F;</c:otherwise>
+                <c:when test="${p.categoria == 'SEMENTE'}"><span class="i i-rebento"></span></c:when>
+                <c:when test="${p.categoria == 'FERTILIZANTE'}"><span class="i i-frasco"></span></c:when>
+                <c:when test="${p.categoria == 'MAQUINARIA'}"><span class="i i-tractor"></span></c:when>
+                <c:otherwise><span class="i i-ferramenta"></span></c:otherwise>
             </c:choose>
         </div>
         <div class="corpo">
@@ -49,7 +49,7 @@
                 <input type="hidden" name="acao" value="adicionar">
                 <input type="hidden" name="produtoId" value="${p.id}">
                 <input type="number" name="quantidade" value="1" min="1" max="${p.quantidade}" aria-label="Quantidade">
-                <button type="submit">&#x1F6D2; Adicionar</button>
+                <button type="submit"><span class="i i-carrinho"></span> Adicionar</button>
             </form>
         </div>
     </article>

@@ -12,7 +12,7 @@
 <c:if test="${not empty erro}"><p class="alerta erro"><c:out value="${erro}"/></p></c:if>
 <c:choose>
 <c:when test="${empty carrinho}">
-    <div class="painel vazio"><div class="ico">&#x1F6D2;</div><p>O carrinho está vazio.</p>
+    <div class="painel vazio"><div class="ico"><span class="i i-carrinho"></span></div><p>O carrinho está vazio.</p>
         <a class="botao" href="${ctx}/catalogo">Ir às compras</a></div>
 </c:when>
 <c:otherwise>

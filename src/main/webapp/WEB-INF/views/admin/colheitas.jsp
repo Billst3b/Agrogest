@@ -27,7 +27,7 @@
 </section>
 <section class="painel sem-padding">
 <c:choose>
-<c:when test="${empty colheitas}"><div class="vazio"><div class="ico">&#x1F9FA;</div><p>Nenhuma colheita registada.</p></div></c:when>
+<c:when test="${empty colheitas}"><div class="vazio"><div class="ico"><span class="i i-cesto"></span></div><p>Nenhuma colheita registada.</p></div></c:when>
 <c:otherwise><div class="tabela-wrap">
 <table><thead><tr><th>ID</th><th>Cultivo</th><th>Data</th><th class="num">Quantidade</th><th class="num">Preço/kg</th><th class="num">Total</th></tr></thead><tbody>
 <c:forEach var="co" items="${colheitas}"><tr>

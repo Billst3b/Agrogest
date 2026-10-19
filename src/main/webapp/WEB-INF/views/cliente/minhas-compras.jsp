@@ -11,7 +11,7 @@
 <div class="cabecalho"><div><h2>Histórico de compras</h2><p>As suas facturas anteriores.</p></div></div>
 <c:choose>
 <c:when test="${empty vendas}">
-    <div class="painel vazio"><div class="ico">&#x1F9FE;</div><p>Ainda não efectuou compras.</p>
+    <div class="painel vazio"><div class="ico"><span class="i i-recibo"></span></div><p>Ainda não efectuou compras.</p>
         <a class="botao" href="${ctx}/catalogo">Ver catálogo</a></div>
 </c:when>
 <c:otherwise>

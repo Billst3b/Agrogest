@@ -21,7 +21,7 @@
 </section>
 <section class="painel sem-padding">
 <c:choose>
-<c:when test="${empty campanhas}"><div class="vazio"><div class="ico">&#x1F4C5;</div><p>Nenhuma campanha registada.</p></div></c:when>
+<c:when test="${empty campanhas}"><div class="vazio"><div class="ico"><span class="i i-calendario"></span></div><p>Nenhuma campanha registada.</p></div></c:when>
 <c:otherwise><div class="tabela-wrap">
 <table><thead><tr><th>ID</th><th>Nome</th><th>Início</th><th>Fim</th><th>Estado</th><th class="num">Ações</th></tr></thead><tbody>
 <c:forEach var="c" items="${campanhas}"><tr>

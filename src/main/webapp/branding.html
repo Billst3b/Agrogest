@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Identidade Visual & Logotipos — AgroGest</title>
+    <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+    <link rel="stylesheet" href="css/style.css?v=6">
+    <style>
+        .brand-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 24px;
+        }
+        .brand-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+            margin-top: 32px;
+        }
+        .brand-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 32px 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        .brand-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(180, 244, 97, 0.4);
+        }
+        .brand-card.active {
+            border: 1.5px solid var(--lima);
+            box-shadow: 0 0 30px rgba(180, 244, 97, 0.2), 0 20px 40px rgba(0,0,0,0.5);
+        }
+        .brand-preview-box {
+            width: 100%;
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.06) 0%, rgba(0,0,0,0.4) 100%);
+            border-radius: 18px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+        .brand-preview-box.light {
+            background: radial-gradient(circle at center, #ffffff 0%, #e2e8f0 100%);
+        }
+        .brand-preview-box img {
+            width: 80px;
+            height: 80px;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+        }
+        .brand-preview-box.full-box img {
+            width: 80%;
+            height: auto;
+            max-width: 260px;
+        }
+        .brand-badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+        }
+    </style>
+</head>
+<body style="min-height: 100vh; background: radial-gradient(circle at 15% 15%, rgba(180, 244, 97, 0.08), transparent 35%), radial-gradient(circle at 85% 85%, rgba(245, 158, 11, 0.06), transparent 40%), #141013;">
+
+<div class="brand-container">
+    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
+        <a href="login.jsp" class="marca">
+            <img src="img/logo-icon.svg" alt="AgroGest" class="logo-img">
+            <span class="marca-texto">Agro<span class="destaque">Gest</span></span>
+        </a>
+        <div style="display:flex; gap:12px;">
+            <a href="login.jsp" class="botao secundario">Entrar no Sistema</a>
+            <a href="catalogo" class="botao">Ver Catálogo</a>
+        </div>
+    </div>
+
+    <div style="margin-top: 40px; text-align: center;">
+        <span class="badge aberta" style="margin-bottom:12px;">Identidade de Marca AgroGest · Nampula</span>
+        <h1 style="font-size: 2.4rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 12px;">
+            Novo Logotipo Vetorial & Símbolo Oficial
+        </h1>
+        <p class="muted" style="max-width: 680px; margin: 0 auto; font-size: 1.05rem;">
+            Substituição completa do ícone genérico por uma marca moderna, minimalista e desenvolvida de raiz em SVG puro. Integrada perfeitamente no sistema Glassmorphism, barra lateral flutuante, ecrã de login e facturas comerciais.
+        </p>
+    </div>
+
+    <div class="brand-grid">
+        <!-- Opção A -->
+        <div class="brand-card active">
+            <span class="badge aberta brand-badge">Ativo no Sistema</span>
+            <div class="brand-preview-box">
+                <img src="img/logo-icon.svg" alt="Opção A">
+            </div>
+            <h3 style="margin-bottom: 8px;">Opção A: Broto Tecnológico & Sulcos</h3>
+            <p class="muted" style="font-size: 0.88rem; line-height: 1.5; margin-bottom: 16px;">
+                Combina o 'A' de AgroGest com um broto vegetal fluorescente, um sol/semente dourada e linhas em perspectiva que evocam os campos agrícolas de Nampula.
+            </p>
+            <div style="display:flex; gap:8px; font-size: 0.78rem;" class="muted">
+                <span class="badge">Sidebar Dock</span>
+                <span class="badge">Favicon</span>
+                <span class="badge">SVGs Puros</span>
+            </div>
+        </div>
+
+        <!-- Opção B -->
+        <div class="brand-card">
+            <span class="badge brand-badge">Alternativa B</span>
+            <div class="brand-preview-box">
+                <img src="img/logo-option-b.svg" alt="Opção B">
+            </div>
+            <h3 style="margin-bottom: 8px;">Opção B: Monograma 'A' & Espiga</h3>
+            <p class="muted" style="font-size: 0.88rem; line-height: 1.5; margin-bottom: 16px;">
+                Design geométrico arrojado centrado no monograma 'A', integrando uma espiga de milho/cereais dourada que simboliza a abundância e as colheitas ricas.
+            </p>
+            <div style="display:flex; gap:8px; font-size: 0.78rem;" class="muted">
+                <span class="badge">Geométrico</span>
+                <span class="badge">Milho & Grãos</span>
+                <span class="badge">Ouro & Lima</span>
+            </div>
+        </div>
+
+        <!-- Opção C -->
+        <div class="brand-card">
+            <span class="badge brand-badge">Alternativa C</span>
+            <div class="brand-preview-box">
+                <img src="img/logo-option-c.svg" alt="Opção C">
+            </div>
+            <h3 style="margin-bottom: 8px;">Opção C: Escudo & Ciclo Infinito</h3>
+            <p class="muted" style="font-size: 0.88rem; line-height: 1.5; margin-bottom: 16px;">
+                Escudo dinâmico com duas folhas interligadas num ciclo infinito de renovação do solo fértil, transmitindo confiança institucional, robustez e sustentabilidade.
+            </p>
+            <div style="display:flex; gap:8px; font-size: 0.78rem;" class="muted">
+                <span class="badge">Sustentabilidade</span>
+                <span class="badge">Segurança</span>
+                <span class="badge">Minimalista</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Seção de Versões Completas -->
+    <div style="margin-top: 50px;">
+        <h2 style="font-size: 1.5rem; margin-bottom: 20px;">Versões de Logotipo Completo (Banner & Factura)</h2>
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+            <!-- Versão Dark Glass -->
+            <div class="brand-card" style="align-items:flex-start; text-align:left;">
+                <span class="badge aberta" style="margin-bottom:12px;">Ecrã & Dark Glass</span>
+                <div class="brand-preview-box full-box">
+                    <img src="img/logo-full.svg" alt="Logo Full Dark">
+                </div>
+                <strong>AgroGest Versão Primária Dark</strong>
+                <p class="muted" style="font-size:0.86rem; margin-top:6px;">Utilizado na página de boas-vindas, login, registo e na versão digital da factura.</p>
+            </div>
+            <!-- Versão Light / Impressão -->
+            <div class="brand-card" style="align-items:flex-start; text-align:left;">
+                <span class="badge" style="margin-bottom:12px;">Impressão Oficial A4</span>
+                <div class="brand-preview-box light full-box">
+                    <img src="img/logo-full-light.svg" alt="Logo Full Light">
+                </div>
+                <strong style="color:#ffffff;">AgroGest Versão Comercial Papel</strong>
+                <p class="muted" style="font-size:0.86rem; margin-top:6px;">Otimizado em tons de ardósia e verde esmeralda para impressão em folhas de papel A4 sem perda de nitidez.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

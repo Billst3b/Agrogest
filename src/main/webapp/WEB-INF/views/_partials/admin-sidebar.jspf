@@ -1,7 +1,10 @@
 <%@ page pageEncoding="UTF-8" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <aside class="sidebar">
-    <a class="marca" href="${ctx}/admin/dashboard"><span class="logo"><span class="i i-folha"></span></span> AgroGest</a>
+    <a class="marca" href="${ctx}/admin/dashboard" title="AgroGest Moçambique">
+        <img src="${ctx}/img/logo-icon.svg" alt="AgroGest" class="logo-img">
+        <span class="marca-texto">Agro<span class="destaque">Gest</span></span>
+    </a>
     <a class="item ${ativo == 'dashboard' ? 'ativo' : ''}" href="${ctx}/admin/dashboard"><span class="i i-painel"></span> Dashboard</a>
     <a class="item ${ativo == 'produtos' ? 'ativo' : ''}" href="${ctx}/admin/produtos"><span class="i i-caixa"></span> Produtos</a>
     <a class="item ${ativo == 'fornecedores' ? 'ativo' : ''}" href="${ctx}/admin/fornecedores"><span class="i i-camiao"></span> Fornecedores</a>

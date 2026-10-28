@@ -2,7 +2,10 @@
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <header class="topbar">
     <div class="inner">
-        <a class="marca" href="${ctx}/catalogo"><span class="logo"><span class="i i-folha"></span></span> AgroGest</a>
+        <a class="marca" href="${ctx}/catalogo" title="AgroGest Moçambique">
+            <img src="${ctx}/img/logo-icon.svg" alt="AgroGest" class="logo-img">
+            <span class="marca-texto">Agro<span class="destaque">Gest</span></span>
+        </a>
         <nav>
             <span class="ola">Olá, <strong><c:out value="${sessionScope.nome}"/></strong></span>
             <a class="${ativo == 'catalogo' ? 'ativo' : ''}" href="${ctx}/catalogo"><span class="i i-caixa"></span> Catálogo</a>

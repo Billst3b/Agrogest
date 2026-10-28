@@ -5,7 +5,9 @@
 <head><%@ include file="/WEB-INF/views/_partials/head.jspf" %><title>Criar conta — AgroGest</title></head>
 <body class="centro">
 <section class="hero">
-    <span class="marca"><span class="logo"><span class="i i-folha"></span></span> AgroGest</span>
+    <div style="margin-bottom:14px">
+        <img src="${pageContext.request.contextPath}/img/logo-full.svg" alt="AgroGest — Gestão Agrícola Integrada" class="logo-full-img">
+    </div>
     <div>
         <span class="badge aberta" style="margin-bottom:14px">Auto-Registo de Clientes</span>
         <h2>Adquira insumos agrícolas com emissão imediata de factura.</h2>

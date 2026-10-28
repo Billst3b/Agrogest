@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none">
+  <defs>
+    <linearGradient id="favBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1f181c"/>
+      <stop offset="100%" stop-color="#090708"/>
+    </linearGradient>
+    <linearGradient id="favLime" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#22c55e"/>
+      <stop offset="100%" stop-color="#b4f461"/>
+    </linearGradient>
+  </defs>
+  <rect width="32" height="32" rx="9" fill="url(#favBg)"/>
+  <rect x="0.5" y="0.5" width="31" height="31" rx="8.5" stroke="rgba(180,244,97,0.4)" stroke-width="1"/>
+  <!-- Seed Sun -->
+  <circle cx="22" cy="10" r="2.5" fill="#f59e0b"/>
+  <!-- Field curve -->
+  <path d="M7 25 C 11 21, 14 18, 16 17" stroke="rgba(255,255,255,0.3)" stroke-width="1.2" stroke-linecap="round"/>
+  <path d="M25 25 C 21 21, 18 18, 16 17" stroke="rgba(255,255,255,0.3)" stroke-width="1.2" stroke-linecap="round"/>
+  <!-- Sprout -->
+  <path d="M16 17 C 16 10, 20.5 7, 22 6.5 C 22.5 9.5, 20 13.5, 16 17 Z" fill="url(#favLime)"/>
+  <path d="M16 17 C 12 15, 8 11.5, 9.5 7 C 13 6.5, 15 10.5, 16 17 Z" fill="#22c55e"/>
+  <path d="M16 23 V 13" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round"/>
+</svg>

@@ -81,7 +81,7 @@ h3 { font-size: 1.08rem; margin-bottom: 12px; letter-spacing: -0.01em; }
 .muted { color: var(--texto-2); }
 .num { font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
 
-/* ============ Marca & Logo ============ */
+/* ============ Marca & Logo (Glassmorphism Brand Identity) ============ */
 .marca {
     display: inline-flex;
     align-items: center;
@@ -91,19 +91,47 @@ h3 { font-size: 1.08rem; margin-bottom: 12px; letter-spacing: -0.01em; }
     color: #ffffff;
     text-decoration: none;
     letter-spacing: -0.02em;
+    transition: transform 0.2s ease, opacity 0.2s ease;
 }
-.marca .logo {
-    display: grid;
-    place-items: center;
+.marca:hover {
+    transform: translateY(-1px);
+    opacity: 0.95;
+}
+.marca .logo-img {
     width: 38px;
     height: 38px;
     border-radius: 12px;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.05));
-    border: 1px solid rgba(255, 255, 255, 0.24);
-    color: var(--lima);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+    display: block;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.45);
+    flex-shrink: 0;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
-.marca .logo .i { width: 20px; height: 20px; }
+.marca:hover .logo-img {
+    transform: scale(1.05) rotate(-2deg);
+}
+.marca-texto {
+    display: inline-flex;
+    align-items: baseline;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: #ffffff;
+    font-size: 1.25rem;
+}
+.marca-texto .destaque {
+    color: var(--lima);
+    text-shadow: 0 0 16px rgba(180, 244, 97, 0.4);
+}
+.logo-full-img {
+    height: 48px;
+    width: auto;
+    display: block;
+    filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.5));
+}
+.logo-factura {
+    height: 44px;
+    width: auto;
+    display: block;
+}
 
 /* ============ Layout Admin (Floating Black Pill Sidebar + Main Stage) ============ */
 .app {
@@ -1434,8 +1462,12 @@ ul.lista li {
     .linha-venda { grid-template-columns: 1fr; }
 }
 
+.so-impressao { display: none; }
+
 /* ============ Print Stylesheet (Official A4 Commercial Invoice) ============ */
 @media print {
+    .som-ecra { display: none !important; }
+    .so-impressao { display: block !important; }
     body {
         background: #ffffff !important;
         color: #000000 !important;

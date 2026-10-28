@@ -68,6 +68,58 @@ body {
         radial-gradient(circle at 75% 82%, rgba(245, 158, 11, 0.13) 0%, transparent 50%),
         linear-gradient(135deg, #2d2628 0%, #3a3133 45%, #1e1a1c 100%);
     background-attachment: fixed;
+    transition: background-color 0.35s ease, background-image 0.35s ease;
+}
+
+/* ============ Opções de Cores de Fundo (Atmospheric Background Themes) ============ */
+html[data-tema="floresta"] body {
+    --bg-base: #0c1d15;
+    background-color: #0c1d15;
+    background-image:
+        radial-gradient(circle at 32% 25%, rgba(34, 197, 94, 0.26) 0%, transparent 48%),
+        radial-gradient(circle at 82% 20%, rgba(180, 244, 97, 0.16) 0%, transparent 44%),
+        radial-gradient(circle at 18% 78%, rgba(16, 185, 129, 0.20) 0%, transparent 48%),
+        radial-gradient(circle at 75% 82%, rgba(20, 184, 166, 0.15) 0%, transparent 50%),
+        linear-gradient(135deg, #0f251b 0%, #173627 48%, #091710 100%);
+}
+html[data-tema="oceano"] body {
+    --bg-base: #0b1623;
+    background-color: #0b1623;
+    background-image:
+        radial-gradient(circle at 35% 26%, rgba(56, 189, 248, 0.24) 0%, transparent 48%),
+        radial-gradient(circle at 84% 22%, rgba(99, 102, 241, 0.20) 0%, transparent 44%),
+        radial-gradient(circle at 20% 78%, rgba(14, 165, 233, 0.18) 0%, transparent 48%),
+        radial-gradient(circle at 75% 82%, rgba(180, 244, 97, 0.10) 0%, transparent 50%),
+        linear-gradient(135deg, #0f1e30 0%, #162b44 48%, #09121d 100%);
+}
+html[data-tema="savana"] body {
+    --bg-base: #1f1b11;
+    background-color: #1f1b11;
+    background-image:
+        radial-gradient(circle at 36% 26%, rgba(245, 158, 11, 0.26) 0%, transparent 48%),
+        radial-gradient(circle at 80% 24%, rgba(180, 244, 97, 0.15) 0%, transparent 44%),
+        radial-gradient(circle at 22% 76%, rgba(217, 119, 6, 0.20) 0%, transparent 48%),
+        radial-gradient(circle at 75% 82%, rgba(132, 204, 22, 0.14) 0%, transparent 50%),
+        linear-gradient(135deg, #282214 0%, #362d1a 48%, #16130c 100%);
+}
+html[data-tema="ametista"] body {
+    --bg-base: #191122;
+    background-color: #191122;
+    background-image:
+        radial-gradient(circle at 36% 28%, rgba(192, 132, 252, 0.24) 0%, transparent 48%),
+        radial-gradient(circle at 82% 22%, rgba(244, 114, 182, 0.18) 0%, transparent 44%),
+        radial-gradient(circle at 18% 75%, rgba(139, 92, 246, 0.20) 0%, transparent 48%),
+        radial-gradient(circle at 75% 82%, rgba(180, 244, 97, 0.10) 0%, transparent 50%),
+        linear-gradient(135deg, #21162e 0%, #2f1f42 48%, #120c1a 100%);
+}
+html[data-tema="obsidiana"] body {
+    --bg-base: #090a0d;
+    background-color: #090a0d;
+    background-image:
+        radial-gradient(circle at 40% 25%, rgba(148, 163, 184, 0.12) 0%, transparent 48%),
+        radial-gradient(circle at 82% 20%, rgba(180, 244, 97, 0.09) 0%, transparent 42%),
+        radial-gradient(circle at 75% 82%, rgba(56, 189, 248, 0.08) 0%, transparent 50%),
+        linear-gradient(135deg, #0d0f14 0%, #14171f 48%, #07080a 100%);
 }
 
 a { color: var(--lima); text-decoration: none; transition: all 0.2s ease; }
@@ -81,11 +133,11 @@ h3 { font-size: 1.08rem; margin-bottom: 12px; letter-spacing: -0.01em; }
 .muted { color: var(--texto-2); }
 .num { font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
 
-/* ============ Marca & Logo (Glassmorphism Brand Identity) ============ */
+/* ============ Marca & Logo (1.B Neon Glass + 2.B AgroGest Bold + 3.B Tagline + 4.2 Símbolo Solto) ============ */
 .marca {
     display: inline-flex;
     align-items: center;
-    gap: 12px;
+    gap: 11px;
     font-weight: 800;
     font-size: 1.18rem;
     color: #ffffff;
@@ -95,52 +147,93 @@ h3 { font-size: 1.08rem; margin-bottom: 12px; letter-spacing: -0.01em; }
 }
 .marca:hover {
     transform: translateY(-1px);
-    opacity: 0.95;
+    opacity: 0.96;
 }
 .marca .logo-img {
-    width: 38px;
-    height: 38px;
-    border-radius: 12px;
+    width: 44px;
+    height: 44px;
+    object-fit: contain;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    filter: drop-shadow(0 4px 10px rgba(180, 244, 97, 0.28));
     display: block;
-    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.45);
     flex-shrink: 0;
     transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 .marca:hover .logo-img {
-    transform: scale(1.05) rotate(-2deg);
+    transform: scale(1.06);
+}
+.marca-bloco {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.05;
 }
 .marca-texto {
     display: inline-flex;
     align-items: baseline;
     font-weight: 800;
+    font-size: 1.3rem;
     letter-spacing: -0.03em;
     color: #ffffff;
-    font-size: 1.25rem;
 }
 .marca-texto .destaque {
     color: var(--lima);
-    text-shadow: 0 0 16px rgba(180, 244, 97, 0.4);
+    font-weight: 800;
+    text-shadow: 0 0 16px rgba(180, 244, 97, 0.35);
 }
-.logo-full-img {
-    height: 48px;
-    width: auto;
-    display: block;
-    filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.5));
+.marca-sub {
+    font-size: 0.56rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--texto-2);
+    margin-top: 3px;
+    text-transform: uppercase;
+    white-space: nowrap;
 }
-.logo-factura {
-    height: 44px;
-    width: auto;
-    display: block;
+.marca-hero-vertical {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 10px;
+}
+.logo-hero-img {
+    width: 96px;
+    height: 96px;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.5));
+    margin-bottom: 4px;
+}
+.marca-texto-hero {
+    font-size: 2.1rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: #ffffff;
+    line-height: 1.05;
+}
+.marca-texto-hero .destaque {
+    color: var(--lima);
+    font-weight: 800;
+    text-shadow: 0 0 20px rgba(180, 244, 97, 0.35);
+}
+.marca-sub-hero {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: var(--texto-2);
+    margin-top: 4px;
+    text-transform: uppercase;
 }
 
-/* ============ Layout Admin (Floating Black Pill Sidebar + Main Stage) ============ */
+/* ============ Layout Admin (Floating Black Pill Sidebar + Wide Main Stage) ============ */
 .app {
     display: grid;
-    grid-template-columns: 248px 1fr;
+    grid-template-columns: 248px minmax(0, 1fr);
     min-height: 100dvh;
-    padding: 18px;
+    padding: 18px 26px;
     gap: 24px;
-    max-width: 1600px;
+    max-width: 1920px;
+    width: 97vw;
     margin: 0 auto;
 }
 
@@ -218,8 +311,8 @@ h3 { font-size: 1.08rem; margin-bottom: 12px; letter-spacing: -0.01em; }
 }
 
 .conteudo {
-    padding: 8px 10px 32px;
-    max-width: 1320px;
+    padding: 8px 6px 36px;
+    max-width: none;
     width: 100%;
     min-width: 0;
 }
@@ -231,6 +324,12 @@ h3 { font-size: 1.08rem; margin-bottom: 12px; letter-spacing: -0.01em; }
     justify-content: space-between;
     gap: 16px;
     margin-bottom: 24px;
+    flex-wrap: wrap;
+}
+.cabecalho-direita {
+    display: flex;
+    align-items: center;
+    gap: 12px;
     flex-wrap: wrap;
 }
 .cabecalho p {
@@ -302,7 +401,8 @@ h3 { font-size: 1.08rem; margin-bottom: 12px; letter-spacing: -0.01em; }
     position: sticky;
     top: 14px;
     z-index: 30;
-    max-width: 1320px;
+    max-width: 1780px;
+    width: 96vw;
     margin: 14px auto 0;
     padding: 0 18px;
 }
@@ -353,7 +453,8 @@ h3 { font-size: 1.08rem; margin-bottom: 12px; letter-spacing: -0.01em; }
 }
 
 .pagina {
-    max-width: 1320px;
+    max-width: 1780px;
+    width: 96vw;
     margin: 0 auto;
     padding: 28px 20px 56px;
 }
@@ -1462,12 +1563,8 @@ ul.lista li {
     .linha-venda { grid-template-columns: 1fr; }
 }
 
-.so-impressao { display: none; }
-
 /* ============ Print Stylesheet (Official A4 Commercial Invoice) ============ */
 @media print {
-    .som-ecra { display: none !important; }
-    .so-impressao { display: block !important; }
     body {
         background: #ffffff !important;
         color: #000000 !important;
@@ -1483,10 +1580,15 @@ ul.lista li {
         margin: 0 !important;
         max-width: 100% !important;
     }
-    .factura h1, .factura h2, .factura h3, .factura strong, .factura td, .factura th, .factura .marca {
+    .factura h1, .factura h2, .factura h3, .factura strong, .factura td, .factura th, .factura .marca, .factura .marca-texto {
         color: #000000 !important;
+        text-shadow: none !important;
     }
-    .factura .muted, .factura .etiqueta {
+    .factura .marca-texto .destaque {
+        color: #15803d !important;
+        text-shadow: none !important;
+    }
+    .factura .marca-sub, .factura .muted, .factura .etiqueta {
         color: #444444 !important;
     }
     .factura .dados {
@@ -1495,5 +1597,372 @@ ul.lista li {
     }
     .factura th, .factura td {
         border-bottom: 1px solid #dddddd !important;
+    }
+}
+
+/* ============ Seletor de Cores de Fundo (Theme Swatches) ============ */
+.tema-seletor {
+    padding: 8px 12px 12px;
+    margin-bottom: 6px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+.tema-rotulo {
+    display: block;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--texto-3);
+    margin-bottom: 8px;
+}
+.tema-bolhas {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+.tema-bolhas-inline {
+    padding: 4px 10px;
+    border-radius: var(--raio-pill);
+    background: rgba(0, 0, 0, 0.28);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.tema-bolha {
+    width: 22px;
+    height: 22px;
+    min-height: 22px;
+    padding: 0;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.25);
+    cursor: pointer;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.45);
+    transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+}
+.tema-bolha:hover {
+    transform: scale(1.16);
+    border-color: rgba(255, 255, 255, 0.75);
+}
+.tema-bolha.ativo {
+    border-color: var(--lima);
+    box-shadow: 0 0 0 2px rgba(180, 244, 97, 0.35), 0 4px 10px rgba(0, 0, 0, 0.5);
+    transform: scale(1.12);
+}
+.tema-bolha.t-bronze { background: linear-gradient(135deg, #d67a56, #2d2628); }
+.tema-bolha.t-floresta { background: linear-gradient(135deg, #22c55e, #0c1d15); }
+.tema-bolha.t-oceano { background: linear-gradient(135deg, #38bdf8, #0f1e30); }
+.tema-bolha.t-savana { background: linear-gradient(135deg, #f59e0b, #282214); }
+.tema-bolha.t-ametista { background: linear-gradient(135deg, #c084fc, #21162e); }
+.tema-bolha.t-obsidiana { background: linear-gradient(135deg, #64748b, #090a0d); }
+
+/* ============ Modal Glass Popup & Product Studio (<dialog>) ============ */
+dialog.modal-glass {
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 28px;
+    background: linear-gradient(155deg, rgba(30, 26, 29, 0.94) 0%, rgba(16, 14, 17, 0.97) 100%);
+    backdrop-filter: blur(28px) saturate(165%);
+    -webkit-backdrop-filter: blur(28px) saturate(165%);
+    color: var(--texto);
+    box-shadow: 0 32px 90px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.22);
+    padding: 28px 32px;
+    max-width: 960px;
+    width: min(94vw, 960px);
+    max-height: 90dvh;
+    overflow-y: auto;
+    margin: auto;
+}
+dialog.modal-glass.modal-venda-box {
+    max-width: 860px;
+    width: min(94vw, 860px);
+}
+dialog:modal {
+    overscroll-behavior: contain;
+}
+dialog.modal-glass::backdrop {
+    background: rgba(6, 5, 8, 0.72);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    overflow: hidden;
+    overscroll-behavior: contain;
+}
+.modal-cab {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    padding-bottom: 18px;
+    margin-bottom: 22px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.modal-cab h3 {
+    margin: 4px 0 0;
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: #ffffff;
+}
+.etiqueta-modal {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--lima);
+}
+.btn-fechar-modal {
+    width: 38px;
+    height: 38px;
+    min-height: 38px;
+    padding: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--texto-2);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow: none;
+    font-size: 1rem;
+    display: grid;
+    place-items: center;
+}
+.btn-fechar-modal:hover {
+    background: rgba(255, 255, 255, 0.16);
+    color: #ffffff;
+}
+
+.studio-grid {
+    display: grid;
+    grid-template-columns: 300px minmax(0, 1fr);
+    gap: 28px;
+    align-items: start;
+}
+.studio-preview-col {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.preview-live-card {
+    pointer-events: none;
+    border-color: rgba(180, 244, 97, 0.28);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+}
+.preview-live-card .foto {
+    height: 165px;
+}
+.galeria-rapida {
+    background: rgba(0, 0, 0, 0.28);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 18px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.galeria-titulo {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--texto-2);
+}
+.galeria-thumbs {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 6px;
+}
+.thumb-item {
+    padding: 0;
+    min-height: 44px;
+    height: 44px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 2px solid transparent;
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: none;
+}
+.thumb-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.thumb-item:hover {
+    transform: translateY(-1px);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+.thumb-item.ativo {
+    border-color: var(--lima);
+    box-shadow: 0 0 0 2px rgba(180, 244, 97, 0.3);
+}
+
+.studio-campos-col {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.passo-bloco {
+    background: rgba(255, 255, 255, 0.035);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    padding: 14px 16px;
+}
+.passo-etiqueta {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+.cat-pills {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+}
+.cat-pill {
+    background: rgba(0, 0, 0, 0.32);
+    color: var(--texto-2);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
+    padding: 10px 10px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    box-shadow: none;
+    justify-content: center;
+}
+.cat-pill:hover {
+    background: rgba(255, 255, 255, 0.09);
+    color: #ffffff;
+}
+.cat-pill.ativo {
+    background: rgba(180, 244, 97, 0.16);
+    color: var(--lima);
+    border-color: var(--lima);
+    box-shadow: 0 6px 18px rgba(180, 244, 97, 0.18);
+}
+.studio-linha-3 {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 0.9fr;
+    gap: 12px;
+}
+.studio-linha-2 {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 12px;
+}
+.un-chips {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+.un-chips span {
+    font-size: 0.74rem;
+    color: var(--texto-3);
+    margin-right: 4px;
+}
+.un-chip {
+    min-height: 28px;
+    padding: 4px 12px;
+    border-radius: var(--raio-pill);
+    font-size: 0.75rem;
+    font-weight: 700;
+    background: rgba(0, 0, 0, 0.3);
+    color: var(--texto-2);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: none;
+}
+.un-chip:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+}
+.un-chip.ativo {
+    background: #ffffff;
+    color: #141215;
+    border-color: #ffffff;
+}
+.modal-rodape {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    padding-top: 8px;
+}
+
+/* ============ Tabela de Vendas Descomplicada (Clean Item Pills & Consolidated Totals) ============ */
+.tabela-vendas td {
+    vertical-align: middle;
+}
+.cel-factura {
+    white-space: nowrap;
+}
+.cel-factura .data-sub {
+    display: block;
+    font-size: 0.76rem;
+    color: var(--texto-3);
+    margin-top: 5px;
+}
+.cel-cliente strong {
+    display: block;
+    color: #ffffff;
+    font-size: 0.94rem;
+}
+.cel-cliente small {
+    display: block;
+    margin-top: 3px;
+    font-size: 0.78rem;
+}
+.vendas-itens-lista {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+.venda-item-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: rgba(0, 0, 0, 0.28);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 5px 10px;
+    font-size: 0.82rem;
+}
+.venda-item-pill .qtd-pill {
+    background: rgba(180, 244, 97, 0.18);
+    color: var(--lima);
+    font-weight: 800;
+    padding: 1px 7px;
+    border-radius: 8px;
+    font-size: 0.76rem;
+}
+.venda-item-pill .nome-pill {
+    color: #ffffff;
+    font-weight: 600;
+}
+.venda-item-pill .preco-un-pill {
+    color: var(--texto-3);
+    font-size: 0.75rem;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    padding-left: 7px;
+}
+.cel-totais {
+    white-space: nowrap;
+}
+.valor-total-cel {
+    display: block;
+    font-size: 1rem;
+    color: var(--lima);
+    font-weight: 800;
+}
+.sub-iva-cel {
+    display: block;
+    font-size: 0.74rem;
+    color: var(--texto-3);
+    margin-top: 3px;
+}
+
+@media (max-width: 860px) {
+    .studio-grid {
+        grid-template-columns: 1fr;
+    }
+    .cat-pills {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .studio-linha-3, .studio-linha-2 {
+        grid-template-columns: 1fr;
     }
 }

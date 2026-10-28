@@ -22,7 +22,8 @@ public class AuthFilter implements Filter {
         }
         if (path.startsWith("/admin")) {
             if (!"ADMIN".equals(session.getAttribute("perfil"))) {
-                response.sendRedirect(request.getContextPath() + "/erro403.jsp");
+                response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                request.getRequestDispatcher("/erro403.jsp").forward(request, response);
                 return;
             }
         }

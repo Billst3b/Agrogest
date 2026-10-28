@@ -17,8 +17,9 @@ public class LoginServlet extends HttpServlet {
         String email = req.getParameter("email");
         String pass  = req.getParameter("password");
         Utilizador u = DataStore.getInstance().findUtilizadorByEmail(email);
-        if (u != null && u.isAtivo() && u.getPasswordHash().equals(PasswordUtil.hash(pass))) {
-            HttpSession s = req.getSession();
+        if (u != null && u.isAtivo() && pass != null && u.getPasswordHash().equals(PasswordUtil.hash(pass))) {
+            HttpSession s = req.getSession(true);
+            try { req.changeSessionId(); } catch (IllegalStateException ignored) {}
             s.setAttribute("utilizador", u);
             s.setAttribute("perfil", u.getPerfil());
             s.setAttribute("nome", u.getNome());

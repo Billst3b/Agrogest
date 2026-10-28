@@ -9,11 +9,14 @@
 <div class="factura">
     <div class="topo">
         <div>
-            <div style="margin-bottom:8px">
-                <img src="${ctx}/img/logo-full.svg" alt="AgroGest, E.I." class="logo-factura som-ecra">
-                <img src="${ctx}/img/logo-full-light.svg" alt="AgroGest, E.I." class="logo-factura so-impressao">
+            <div class="marca" style="margin-bottom:6px">
+                <img src="${ctx}/img/logo-crest.png" alt="AgroGest, E.I." class="logo-img">
+                <span class="marca-bloco">
+                    <span class="marca-texto">Agro<span class="destaque">Gest</span></span>
+                    <span class="marca-sub">SISTEMA DE GESTÃO AGRÍCOLA</span>
+                </span>
             </div>
-            <p class="muted" style="margin:4px 0 2px">Comércio de Insumos e Produção Agrícola · Província de Nampula</p>
+            <p class="muted" style="margin:6px 0 2px">Comércio de Insumos e Produção Agrícola · Província de Nampula</p>
             <p class="muted" style="margin:0; font-size:0.82rem">NUIT: 400192837 · Av. do Trabalho, Nampula · Moçambique</p>
         </div>
         <div class="numero">

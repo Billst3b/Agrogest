@@ -1,0 +1,21 @@
+# Unidade systemd para o Apache Tomcat 10.1 (AgroGest)
+# Instalar: sudo cp docs/tomcat.service /etc/systemd/system/tomcat.service
+[Unit]
+Description=Apache Tomcat 10.1 - AgroGest
+After=network.target
+
+[Service]
+Type=forking
+User=tomcat
+Group=tomcat
+Environment="JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64"
+Environment="CATALINA_HOME=/opt/tomcat"
+Environment="CATALINA_BASE=/opt/tomcat"
+Environment="CATALINA_PID=/opt/tomcat/temp/tomcat.pid"
+Environment="CATALINA_OPTS=-Xms256M -Xmx512M -server"
+ExecStart=/opt/tomcat/bin/startup.sh
+ExecStop=/opt/tomcat/bin/shutdown.sh
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

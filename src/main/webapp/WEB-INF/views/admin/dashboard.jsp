@@ -17,8 +17,8 @@
         <p>Gestão integrada de produção agrícola, stock e facturação · Província de Nampula</p>
     </div>
     <div class="topo-acoes">
-        <a class="icone-circulo" href="${ctx}/admin/produtos" title="Pesquisar Catálogo e Stock">🔍</a>
-        <a class="icone-circulo" href="${ctx}/admin/relatorios" title="Alertas e Relatórios">🔔<span class="ponto-notif"></span></a>
+        <a class="icone-circulo" href="${ctx}/admin/produtos" title="Pesquisar Catálogo e Stock"></a>
+        <a class="icone-circulo" href="${ctx}/admin/relatorios" title="Alertas e Relatórios"><span class="ponto-notif"></span></a>
         <div class="avatar-pill">
             <span class="bolha">AG</span>
             <span><c:out value="${sessionScope.nome}"/></span>
@@ -75,7 +75,7 @@
         <!-- Top Right: Dual Spline Curve Chart ("Active Users right now") -->
         <section class="card-bento">
             <div class="painel-cab">
-                <h3>Evolução de Receita em Tempo Real 💡</h3>
+                <h3>Evolução de Receita em Tempo Real </h3>
                 <span class="badge aberta">Últimos 6 meses</span>
             </div>
             <div data-grafico="curvas" data-fonte="d-receita" data-formato="moeda" aria-label="Evolução da receita mensal nos últimos 6 meses"></div>

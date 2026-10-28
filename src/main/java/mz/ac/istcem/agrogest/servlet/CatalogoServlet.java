@@ -25,16 +25,12 @@ public class CatalogoServlet extends HttpServlet {
             todos = new ArrayList<>(DataStore.getInstance().produtos);
         }
 
-        List<Produto> disponiveis = todos.stream()
-                .filter(p -> p.getQuantidade() > 0)
-                .collect(Collectors.toList());
-
-        Map<String, Long> contagemPorCat = disponiveis.stream()
+        Map<String, Long> contagemPorCat = todos.stream()
                 .collect(Collectors.groupingBy(Produto::getCategoria, Collectors.counting()));
-        req.setAttribute("totalDisponiveis", disponiveis.size());
+        req.setAttribute("totalDisponiveis", todos.size());
         req.setAttribute("contagemPorCat", contagemPorCat);
 
-        List<Produto> lista = disponiveis.stream()
+        List<Produto> lista = todos.stream()
                 .filter(p -> cat == null || cat.isEmpty() || p.getCategoria().equals(cat))
                 .filter(p -> termo.isEmpty()
                         || p.getNome().toLowerCase().contains(termo)
@@ -51,6 +47,10 @@ public class CatalogoServlet extends HttpServlet {
         } else if ("nome".equals(ord)) {
             lista.sort(Comparator.comparing(Produto::getNome, String.CASE_INSENSITIVE_ORDER));
         }
+
+        HttpSession session = req.getSession();
+        req.setAttribute("erro", session.getAttribute("flashErro"));
+        session.removeAttribute("flashErro");
 
         req.setAttribute("produtos", lista);
         req.getRequestDispatcher("/WEB-INF/views/cliente/catalogo.jsp").forward(req, resp);

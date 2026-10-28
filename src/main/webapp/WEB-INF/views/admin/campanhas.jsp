@@ -8,7 +8,15 @@
 <c:set var="ativo" value="campanhas"/>
 <%@ include file="/WEB-INF/views/_partials/admin-sidebar.jspf" %>
 <main class="conteudo">
-<div class="cabecalho"><div><h2>Campanhas Agrícolas</h2><p>Planeamento de épocas de plantio e colheita na província de Nampula.</p></div></div>
+<div class="cabecalho">
+    <div><h2>Campanhas Agrícolas</h2><p>Planeamento de épocas de plantio e colheita na província de Nampula.</p></div>
+    <div class="filtros" style="margin:0">
+        <a class="chip ${empty param.ordenar ? 'ativo' : ''}" href="${ctx}/admin/campanhas">Ordem de Registo</a>
+        <a class="chip ${param.ordenar == 'nome' ? 'ativo' : ''}" href="${ctx}/admin/campanhas?ordenar=nome">Ordenar: Nome</a>
+        <a class="chip ${param.ordenar == 'data' ? 'ativo' : ''}" href="${ctx}/admin/campanhas?ordenar=data">Ordenar: Data</a>
+    </div>
+</div>
+<c:if test="${not empty erro}"><p class="alerta erro"><c:out value="${erro}"/></p></c:if>
 <section class="painel">
 <h3>Nova Campanha Agrícola</h3>
 <form method="post" class="form-grid">

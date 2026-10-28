@@ -27,15 +27,17 @@
     </div>
 </section>
 
+<c:if test="${not empty erro}"><p class="alerta erro"><c:out value="${erro}"/></p></c:if>
+
 <!-- Category Filter Chips & Search/Sort Bar -->
 <c:set var="catSel" value="${param.categoria}"/>
 <div class="catalogo-barra">
     <nav class="filtros" style="margin-bottom:0" aria-label="Filtrar por categoria">
         <a class="chip ${empty catSel ? 'ativo' : ''}" href="${ctx}/catalogo">Todos (${totalDisponiveis})</a>
-        <a class="chip ${catSel == 'SEMENTE' ? 'ativo' : ''}" href="${ctx}/catalogo?categoria=SEMENTE">🌱 Sementes (${empty contagemPorCat['SEMENTE'] ? 0 : contagemPorCat['SEMENTE']})</a>
-        <a class="chip ${catSel == 'FERTILIZANTE' ? 'ativo' : ''}" href="${ctx}/catalogo?categoria=FERTILIZANTE">🧪 Fertilizantes (${empty contagemPorCat['FERTILIZANTE'] ? 0 : contagemPorCat['FERTILIZANTE']})</a>
-        <a class="chip ${catSel == 'MAQUINARIA' ? 'ativo' : ''}" href="${ctx}/catalogo?categoria=MAQUINARIA">🚜 Maquinaria (${empty contagemPorCat['MAQUINARIA'] ? 0 : contagemPorCat['MAQUINARIA']})</a>
-        <a class="chip ${catSel == 'FERRAMENTA' ? 'ativo' : ''}" href="${ctx}/catalogo?categoria=FERRAMENTA">🔧 Ferramentas (${empty contagemPorCat['FERRAMENTA'] ? 0 : contagemPorCat['FERRAMENTA']})</a>
+        <a class="chip ${catSel == 'SEMENTE' ? 'ativo' : ''}" href="${ctx}/catalogo?categoria=SEMENTE"><span class="i i-folha"></span> Sementes (${empty contagemPorCat['SEMENTE'] ? 0 : contagemPorCat['SEMENTE']})</a>
+        <a class="chip ${catSel == 'FERTILIZANTE' ? 'ativo' : ''}" href="${ctx}/catalogo?categoria=FERTILIZANTE"><span class="i i-caixa"></span> Fertilizantes (${empty contagemPorCat['FERTILIZANTE'] ? 0 : contagemPorCat['FERTILIZANTE']})</a>
+        <a class="chip ${catSel == 'MAQUINARIA' ? 'ativo' : ''}" href="${ctx}/catalogo?categoria=MAQUINARIA"><span class="i i-camiao"></span> Maquinaria (${empty contagemPorCat['MAQUINARIA'] ? 0 : contagemPorCat['MAQUINARIA']})</a>
+        <a class="chip ${catSel == 'FERRAMENTA' ? 'ativo' : ''}" href="${ctx}/catalogo?categoria=FERRAMENTA"><span class="i i-check"></span> Ferramentas (${empty contagemPorCat['FERRAMENTA'] ? 0 : contagemPorCat['FERRAMENTA']})</a>
     </nav>
 
     <form method="get" action="${ctx}/catalogo" class="catalogo-pesquisa">
@@ -80,26 +82,34 @@
             <div style="display:flex; justify-content:space-between; align-items:center; gap:8px">
                 <span class="badge ${p.categoria == 'SEMENTE' ? 'aberta' : p.categoria == 'FERTILIZANTE' ? 'azul' : 'aviso'}"><c:out value="${p.categoria}"/></span>
                 <c:choose>
-                    <c:when test="${p.quantidade < 10}"><span class="badge alerta">Últimas ${p.quantidade} ${p.unidade}</span></c:when>
+                    <c:when test="${p.quantidade <= 0}"><span class="badge alerta">Esgotado (0 ${p.unidade})</span></c:when>
+                    <c:when test="${p.quantidade < 10}"><span class="badge aviso">Últimas ${p.quantidade} ${p.unidade}</span></c:when>
                     <c:otherwise><span class="badge">Stock: ${p.quantidade} ${p.unidade}</span></c:otherwise>
                 </c:choose>
             </div>
             <h3><c:out value="${p.nome}"/></h3>
             <p class="desc"><c:out value="${p.descricao}"/></p>
             <div class="meta-forn">
-                <span>📍 <c:out value="${p.fornecedorNome}"/></span>
+                <span><c:out value="${p.fornecedorNome}"/></span>
                 <c:if test="${not empty p.validade}"><span>⏳ Val: ${p.validade}</span></c:if>
             </div>
             <div class="linha">
                 <span class="preco"><fmt:formatNumber value="${p.preco}" minFractionDigits="2" maxFractionDigits="2"/> MZN</span>
                 <span class="stock">por <c:out value="${p.unidade}"/></span>
             </div>
-            <form method="post" action="${ctx}/carrinho">
-                <input type="hidden" name="acao" value="adicionar">
-                <input type="hidden" name="produtoId" value="${p.id}">
-                <input type="number" name="quantidade" value="1" min="1" max="${p.quantidade}" aria-label="Quantidade">
-                <button type="submit"><span class="i i-carrinho"></span> Adicionar</button>
-            </form>
+            <c:choose>
+                <c:when test="${p.quantidade <= 0}">
+                    <button type="button" class="secundario bloco" disabled style="opacity:0.5; cursor:not-allowed">Indisponível em Stock</button>
+                </c:when>
+                <c:otherwise>
+                    <form method="post" action="${ctx}/carrinho">
+                        <input type="hidden" name="acao" value="adicionar">
+                        <input type="hidden" name="produtoId" value="${p.id}">
+                        <input type="number" name="quantidade" value="1" min="1" aria-label="Quantidade">
+                        <button type="submit"><span class="i i-carrinho"></span> Adicionar</button>
+                    </form>
+                </c:otherwise>
+            </c:choose>
         </div>
     </article>
 </c:forEach>

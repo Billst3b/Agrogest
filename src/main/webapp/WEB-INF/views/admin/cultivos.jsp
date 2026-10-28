@@ -8,7 +8,16 @@
 <c:set var="ativo" value="cultivos"/>
 <%@ include file="/WEB-INF/views/_partials/admin-sidebar.jspf" %>
 <main class="conteudo">
-<div class="cabecalho"><div><h2>Gestão de Cultivos</h2><p>Controlo de culturas, variedades e áreas plantadas (hectares) por campanha.</p></div></div>
+<div class="cabecalho">
+    <div><h2>Gestão de Cultivos</h2><p>Controlo de culturas, variedades e áreas plantadas (hectares) por campanha.</p></div>
+    <div class="filtros" style="margin:0">
+        <a class="chip ${empty param.ordenar ? 'ativo' : ''}" href="${ctx}/admin/cultivos">Ordem de Registo</a>
+        <a class="chip ${param.ordenar == 'nome' ? 'ativo' : ''}" href="${ctx}/admin/cultivos?ordenar=nome">Ordenar: Cultura</a>
+        <a class="chip ${param.ordenar == 'data' ? 'ativo' : ''}" href="${ctx}/admin/cultivos?ordenar=data">Ordenar: Data</a>
+        <a class="chip ${param.ordenar == 'valor' ? 'ativo' : ''}" href="${ctx}/admin/cultivos?ordenar=valor">Ordenar: Hectares</a>
+    </div>
+</div>
+<c:if test="${not empty erro}"><p class="alerta erro"><c:out value="${erro}"/></p></c:if>
 <section class="painel">
 <h3>Registar Novo Cultivo</h3>
 <c:choose>
@@ -35,7 +44,7 @@
 <c:forEach var="cu" items="${cultivos}"><tr>
 <td class="id">#${cu.id}</td>
 <td><c:forEach var="c" items="${campanhas}"><c:if test="${c.id == cu.campanhaId}"><span class="badge">${c.nome}</span></c:if></c:forEach></td>
-<td><strong>🌱 <c:out value="${cu.cultura}"/></strong></td><td><c:out value="${cu.variedade}"/></td><td class="num"><strong>${cu.hectares} ha</strong></td><td>${cu.dataPlantio}</td>
+<td><strong><c:out value="${cu.cultura}"/></strong></td><td><c:out value="${cu.variedade}"/></td><td class="num"><strong>${cu.hectares} ha</strong></td><td>${cu.dataPlantio}</td>
 <td class="acoes-linha"><form method="post" onsubmit="return confirm('Remover este cultivo? (Apenas permitido se não tiver colheitas associadas)')"><input type="hidden" name="acao" value="remover"><input type="hidden" name="id" value="${cu.id}"><button type="submit" class="perigo pequeno">Remover</button></form></td>
 </tr></c:forEach></tbody></table></div></c:otherwise>
 </c:choose>

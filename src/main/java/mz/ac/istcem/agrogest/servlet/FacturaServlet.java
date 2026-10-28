@@ -13,7 +13,13 @@ public class FacturaServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        int id = Integer.parseInt(req.getParameter("id"));
+        int id;
+        try {
+            id = Integer.parseInt(req.getParameter("id"));
+        } catch (NumberFormatException e) {
+            resp.sendError(400, "Identificador de factura inválido");
+            return;
+        }
         Venda v = DataStore.getInstance().findVenda(id);
         if (v == null) { resp.sendError(404); return; }
         String perfil = (String) req.getSession().getAttribute("perfil");

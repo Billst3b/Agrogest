@@ -158,20 +158,20 @@ public class AppListener implements ServletContextListener {
         camp3.setAberta(false);
         store.campanhas.addAll(List.of(camp1, camp2, camp3));
 
-        // 5. Cultivos
+        // 5. Cultivos (datas de plantio coerentes e anteriores às respectivas colheitas)
         Cultivo cu1 = new Cultivo(store.idCultivo.getAndIncrement(), camp1.getId(),
-                "Feijão Nhemba", "Macia", 8.0, LocalDate.of(2026, 10, 15));
-        Cultivo cu2 = new Cultivo(store.idCultivo.getAndIncrement(), camp1.getId(),
-                "Milho Branco", "Matuba ZM523", 14.5, LocalDate.of(2026, 10, 20));
-        Cultivo cu3 = new Cultivo(store.idCultivo.getAndIncrement(), camp1.getId(),
-                "Mandioca Doce", "Nikwaha", 10.0, LocalDate.of(2026, 10, 5));
+                "Feijão Nhemba", "Macia", 8.0, LocalDate.of(2026, 10, 2));
+        Cultivo cu2 = new Cultivo(store.idCultivo.getAndIncrement(), camp2.getId(),
+                "Milho Branco", "Matuba ZM523", 14.5, LocalDate.of(2026, 5, 10));
+        Cultivo cu3 = new Cultivo(store.idCultivo.getAndIncrement(), camp2.getId(),
+                "Mandioca Doce", "Nikwaha", 10.0, LocalDate.of(2026, 4, 5));
         Cultivo cu4 = new Cultivo(store.idCultivo.getAndIncrement(), camp2.getId(),
                 "Soja Comercial", "Sana TGx", 12.0, LocalDate.of(2026, 4, 12));
         Cultivo cu5 = new Cultivo(store.idCultivo.getAndIncrement(), camp3.getId(),
                 "Gergelim Exportação", "Lindi 02", 6.5, LocalDate.of(2025, 11, 2));
         store.cultivos.addAll(List.of(cu1, cu2, cu3, cu4, cu5));
 
-        // 6. Colheitas
+        // 6. Colheitas (todas posteriores à data de plantio de cada cultivo)
         Colheita co1 = new Colheita(store.idColheita.getAndIncrement(), cu1.getId(),
                 LocalDate.of(2026, 10, 25), 3200.0, 22.00);
         Colheita co2 = new Colheita(store.idColheita.getAndIncrement(), cu2.getId(),

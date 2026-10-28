@@ -1,4 +1,52 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" type="image/svg+xml" href="${pageContext.request.contextPath}/img/favicon.svg">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css?v=6">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css?v=8">
+<script>
+(function () {
+    var tema = localStorage.getItem('agrogest-tema') || 'bronze';
+    document.documentElement.setAttribute('data-tema', tema);
+    window.definirTemaAgro = function (novoTema) {
+        document.documentElement.setAttribute('data-tema', novoTema);
+        localStorage.setItem('agrogest-tema', novoTema);
+        document.querySelectorAll('.tema-bolha').forEach(function (b) {
+            b.classList.toggle('ativo', b.getAttribute('data-tema-opcao') === novoTema);
+            b.setAttribute('aria-pressed', b.getAttribute('data-tema-opcao') === novoTema ? 'true' : 'false');
+        });
+    };
+    document.addEventListener('DOMContentLoaded', function () {
+        var atual = document.documentElement.getAttribute('data-tema') || 'bronze';
+        document.querySelectorAll('.tema-bolha').forEach(function (b) {
+            var isAtivo = b.getAttribute('data-tema-opcao') === atual;
+            b.classList.toggle('ativo', isAtivo);
+            b.setAttribute('aria-pressed', isAtivo ? 'true' : 'false');
+            b.addEventListener('click', function () {
+                window.definirTemaAgro(b.getAttribute('data-tema-opcao'));
+            });
+        });
+
+        // Fallback for browsers without native <dialog closedby="any">
+        if (typeof HTMLDialogElement !== 'undefined' && !('closedBy' in HTMLDialogElement.prototype)) {
+            document.querySelectorAll('dialog[closedby="any"]').forEach(function (dialog) {
+                dialog.addEventListener('click', function (event) {
+                    if (event.target !== dialog) return;
+                    var rect = dialog.getBoundingClientRect();
+                    var isDialogContent = (
+                        rect.top <= event.clientY &&
+                        event.clientY <= rect.top + rect.height &&
+                        rect.left <= event.clientX &&
+                        event.clientX <= rect.left + rect.width
+                    );
+                    if (isDialogContent) return;
+                    dialog.close();
+                });
+            });
+        }
+    });
+})();
+</script>
+<script type="module">
+if (!('commandForElement' in HTMLButtonElement.prototype)) {
+    import('https://esm.run/invokers-polyfill').catch(function () {});
+}
+</script>

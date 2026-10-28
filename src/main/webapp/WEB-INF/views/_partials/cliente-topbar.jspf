@@ -2,11 +2,22 @@
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <header class="topbar">
     <div class="inner">
-        <a class="marca" href="${ctx}/catalogo" title="AgroGest Moçambique">
-            <img src="${ctx}/img/logo-icon.svg" alt="AgroGest" class="logo-img">
-            <span class="marca-texto">Agro<span class="destaque">Gest</span></span>
+        <a class="marca" href="${ctx}/catalogo" title="AgroGest — Sistema de Gestão Agrícola">
+            <img src="${ctx}/img/logo-crest.png" alt="AgroGest" class="logo-img">
+            <span class="marca-bloco">
+                <span class="marca-texto">Agro<span class="destaque">Gest</span></span>
+                <span class="marca-sub">SISTEMA DE GESTÃO AGRÍCOLA</span>
+            </span>
         </a>
         <nav>
+            <div class="tema-bolhas topo-temas" role="group" aria-label="Cor de fundo">
+                <button type="button" class="tema-bolha t-bronze" data-tema-opcao="bronze" title="Terra Bronze" aria-label="Tema Terra Bronze"></button>
+                <button type="button" class="tema-bolha t-floresta" data-tema-opcao="floresta" title="Floresta Esmeralda" aria-label="Tema Floresta Esmeralda"></button>
+                <button type="button" class="tema-bolha t-oceano" data-tema-opcao="oceano" title="Oceano Índico" aria-label="Tema Oceano Índico"></button>
+                <button type="button" class="tema-bolha t-savana" data-tema-opcao="savana" title="Savana Dourada" aria-label="Tema Savana Dourada"></button>
+                <button type="button" class="tema-bolha t-ametista" data-tema-opcao="ametista" title="Crepúsculo Ametista" aria-label="Tema Crepúsculo Ametista"></button>
+                <button type="button" class="tema-bolha t-obsidiana" data-tema-opcao="obsidiana" title="Obsidiana Carbono" aria-label="Tema Obsidiana Carbono"></button>
+            </div>
             <span class="ola">Olá, <strong><c:out value="${sessionScope.nome}"/></strong></span>
             <a class="${ativo == 'catalogo' ? 'ativo' : ''}" href="${ctx}/catalogo"><span class="i i-caixa"></span> Catálogo</a>
             <a class="${ativo == 'carrinho' ? 'ativo' : ''}" href="${ctx}/carrinho"><span class="i i-carrinho"></span> Carrinho<c:if test="${not empty sessionScope.carrinho}"> <span class="badge aberta">${sessionScope.carrinho.size()}</span></c:if></a>

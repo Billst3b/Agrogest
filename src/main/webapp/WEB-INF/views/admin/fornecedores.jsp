@@ -19,6 +19,7 @@
         <a class="chip ${param.ordenar == 'provincia' ? 'ativo' : ''}" href="${ctx}/admin/fornecedores?ordenar=provincia">Ordenar: Província</a>
     </div>
 </div>
+<c:if test="${not empty erro}"><p class="alerta erro"><c:out value="${erro}"/></p></c:if>
 <section class="painel">
 <h3>Novo Fornecedor</h3>
 <form method="post" class="form-grid">
@@ -39,7 +40,7 @@
 <c:forEach var="f" items="${fornecedores}"><tr>
 <td class="id">#${f.id}</td><td><strong><c:out value="${f.nome}"/></strong></td>
 <td><span class="badge ${f.tipo == 'SEMENTES' ? 'aberta' : f.tipo == 'FERTILIZANTES' ? 'azul' : 'aviso'}">${f.tipo}</span></td>
-<td><c:out value="${f.contacto}"/></td><td>📍 <c:out value="${f.provincia}"/></td>
+<td><c:out value="${f.contacto}"/></td><td><c:out value="${f.provincia}"/></td>
 <td class="acoes-linha"><form method="post" onsubmit="return confirm('Remover este fornecedor?')"><input type="hidden" name="acao" value="remover"><input type="hidden" name="id" value="${f.id}"><button type="submit" class="perigo pequeno">Remover</button></form></td>
 </tr></c:forEach></tbody></table></div></c:otherwise>
 </c:choose>

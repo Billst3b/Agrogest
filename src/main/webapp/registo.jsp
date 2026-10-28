@@ -5,8 +5,10 @@
 <head><%@ include file="/WEB-INF/views/_partials/head.jspf" %><title>Criar conta — AgroGest</title></head>
 <body class="centro">
 <section class="hero">
-    <div style="margin-bottom:14px">
-        <img src="${pageContext.request.contextPath}/img/logo-full.svg" alt="AgroGest — Gestão Agrícola Integrada" class="logo-full-img">
+    <div class="marca-hero-vertical">
+        <img src="${pageContext.request.contextPath}/img/logo-crest.png" alt="AgroGest" class="logo-hero-img">
+        <div class="marca-texto-hero">Agro<span class="destaque">Gest</span></div>
+        <div class="marca-sub-hero">SISTEMA DE GESTÃO AGRÍCOLA</div>
     </div>
     <div>
         <span class="badge aberta" style="margin-bottom:14px">Auto-Registo de Clientes</span>

@@ -8,11 +8,13 @@ import mz.ac.istcem.agrogest.util.PasswordUtil;
 import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
+
 @WebServlet("/admin/clientes")
 public class ClienteAdminServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         DataStore s = DataStore.getInstance();
+        String ord = req.getParameter("ordenar");
         List<Cliente> clientes;
         synchronized (s.utilizadores) {
             clientes = s.utilizadores.stream().filter(u -> u instanceof Cliente)
@@ -20,6 +22,13 @@ public class ClienteAdminServlet extends HttpServlet {
         }
         Map<Integer, Long> compras = new HashMap<>();
         synchronized (s.vendas) { s.vendas.forEach(v -> compras.merge(v.getClienteId(), 1L, Long::sum)); }
+
+        if ("nome".equals(ord)) {
+            clientes.sort(Comparator.comparing(Cliente::getNome, String.CASE_INSENSITIVE_ORDER));
+        } else if ("compras".equals(ord)) {
+            clientes.sort(Comparator.comparingLong((Cliente c) -> compras.getOrDefault(c.getId(), 0L)).reversed());
+        }
+
         req.setAttribute("clientes", clientes);
         req.setAttribute("compras", compras);
         HttpSession session = req.getSession();

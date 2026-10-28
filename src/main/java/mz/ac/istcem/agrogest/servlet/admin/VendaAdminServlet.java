@@ -8,6 +8,7 @@ import mz.ac.istcem.agrogest.service.VendaService;
 import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
+
 @WebServlet("/admin/vendas")
 public class VendaAdminServlet extends HttpServlet {
     private final VendaService vendaService = new VendaService();
@@ -15,8 +16,15 @@ public class VendaAdminServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         DataStore s = DataStore.getInstance();
+        String ord = req.getParameter("ordenar");
         List<Venda> lista = new ArrayList<>(s.vendas);
-        lista.sort(Comparator.comparing(Venda::getData).reversed());
+        if ("valor".equals(ord)) {
+            lista.sort(Comparator.comparingDouble(Venda::getTotal).reversed());
+        } else if ("nome".equals(ord)) {
+            lista.sort(Comparator.comparing(Venda::getClienteNome, String.CASE_INSENSITIVE_ORDER));
+        } else {
+            lista.sort(Comparator.comparing(Venda::getData).reversed());
+        }
         req.setAttribute("vendas", lista);
         synchronized (s.utilizadores) {
             req.setAttribute("clientes", s.utilizadores.stream().filter(u -> u instanceof Cliente)
@@ -45,7 +53,6 @@ public class VendaAdminServlet extends HttpServlet {
 
             String[] produtoIds = req.getParameterValues("produtoId");
             String[] quantidades = req.getParameterValues("quantidade");
-            // Junta linhas repetidas do mesmo produto
             Map<Integer, Integer> qtdPorProduto = new LinkedHashMap<>();
             for (int i = 0; produtoIds != null && i < produtoIds.length; i++) {
                 if (produtoIds[i].isBlank() || quantidades[i].isBlank()) continue;

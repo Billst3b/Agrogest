@@ -33,12 +33,28 @@ public class CarrinhoServlet extends HttpServlet {
                 int pid = Integer.parseInt(req.getParameter("produtoId"));
                 int qtd = Integer.parseInt(req.getParameter("quantidade"));
                 Produto p = DataStore.getInstance().findProduto(pid);
-                if (p != null && p.getQuantidade() >= qtd) {
+                if (p != null && qtd > 0 && p.getQuantidade() >= qtd) {
                     Optional<VendaItem> ex = carrinho.stream().filter(i -> i.getProdutoId() == pid).findFirst();
                     if (ex.isPresent()) {
-                        ex.get().setQuantidade(ex.get().getQuantidade() + qtd);
-                        ex.get().setSubtotal(ex.get().getQuantidade() * ex.get().getPrecoUnitario());
+                        int novaQtd = Math.min(p.getQuantidade(), ex.get().getQuantidade() + qtd);
+                        ex.get().setQuantidade(novaQtd);
+                        ex.get().setSubtotal(novaQtd * ex.get().getPrecoUnitario());
                     } else carrinho.add(new VendaItem(p, qtd));
+                }
+            }
+            case "atualizar" -> {
+                int idx = Integer.parseInt(req.getParameter("index"));
+                int qtd = Integer.parseInt(req.getParameter("quantidade"));
+                if (idx >= 0 && idx < carrinho.size()) {
+                    VendaItem item = carrinho.get(idx);
+                    Produto p = DataStore.getInstance().findProduto(item.getProdutoId());
+                    if (qtd <= 0) {
+                        carrinho.remove(idx);
+                    } else if (p != null) {
+                        int novaQtd = Math.min(p.getQuantidade(), qtd);
+                        item.setQuantidade(novaQtd);
+                        item.setSubtotal(novaQtd * item.getPrecoUnitario());
+                    }
                 }
             }
             case "remover" -> {

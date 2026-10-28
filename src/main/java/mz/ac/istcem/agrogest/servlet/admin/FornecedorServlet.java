@@ -5,11 +5,23 @@ import jakarta.servlet.http.*;
 import mz.ac.istcem.agrogest.model.Fornecedor;
 import mz.ac.istcem.agrogest.repo.DataStore;
 import java.io.IOException;
+import java.util.*;
+
 @WebServlet("/admin/fornecedores")
 public class FornecedorServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        req.setAttribute("fornecedores", DataStore.getInstance().fornecedores);
+        String ord = req.getParameter("ordenar");
+        List<Fornecedor> lista;
+        synchronized (DataStore.getInstance().fornecedores) {
+            lista = new ArrayList<>(DataStore.getInstance().fornecedores);
+        }
+        if ("nome".equals(ord)) {
+            lista.sort(Comparator.comparing(Fornecedor::getNome, String.CASE_INSENSITIVE_ORDER));
+        } else if ("provincia".equals(ord)) {
+            lista.sort(Comparator.comparing(Fornecedor::getProvincia, String.CASE_INSENSITIVE_ORDER));
+        }
+        req.setAttribute("fornecedores", lista);
         req.getRequestDispatcher("/WEB-INF/views/admin/fornecedores.jsp").forward(req, resp);
     }
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {

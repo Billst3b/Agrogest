@@ -38,7 +38,23 @@ public class AdminDashboardServlet extends HttpServlet {
         synchronized (s.cultivos) { cultivos = new ArrayList<>(s.cultivos); }
         synchronized (s.colheitas) { colheitas = new ArrayList<>(s.colheitas); }
 
-        req.setAttribute("receitaTotal", vendas.stream().mapToDouble(Venda::getTotal).sum());
+        double receitaTotal = vendas.stream().mapToDouble(Venda::getTotal).sum();
+        double valorColheitasTotal = colheitas.stream().mapToDouble(Colheita::getValorTotal).sum();
+        double totalHectares = cultivos.stream().mapToDouble(Cultivo::getHectares).sum();
+        int stockTotalUnidades = produtos.stream().mapToInt(Produto::getQuantidade).sum();
+
+        req.setAttribute("receitaTotal", receitaTotal);
+        req.setAttribute("valorColheitasTotal", valorColheitasTotal);
+        req.setAttribute("totalHectares", totalHectares);
+        req.setAttribute("stockTotalUnidades", stockTotalUnidades);
+
+        // Última venda e produto em destaque para o cartão Bento lateral
+        if (!vendas.isEmpty()) {
+            List<Venda> ordVendas = new ArrayList<>(vendas);
+            ordVendas.sort(Comparator.comparing(Venda::getData).reversed());
+            req.setAttribute("ultimaVenda", ordVendas.get(0));
+            req.setAttribute("ultimasVendas", ordVendas.stream().limit(5).collect(Collectors.toList()));
+        }
 
         // Receita dos últimos 6 meses (meses sem vendas aparecem a zero)
         YearMonth agora = YearMonth.now();
@@ -58,15 +74,43 @@ public class AdminDashboardServlet extends HttpServlet {
                 .collect(Collectors.toMap(Produto::getId, Produto::getCategoria, (a, b) -> a));
         Map<String, Double> porCategoria = new HashMap<>();
         Map<String, Double> porProduto = new HashMap<>();
+        Map<Integer, Integer> qtdVendidaPorProduto = new HashMap<>();
+        Map<Integer, Double> receitaPorProdutoId = new HashMap<>();
+
         for (Venda v : vendas) {
             for (VendaItem it : v.getItens()) {
                 String cat = categoriaPorProduto.getOrDefault(it.getProdutoId(), "OUTRO");
                 porCategoria.merge(cat, it.getSubtotal(), Double::sum);
                 porProduto.merge(it.getProdutoNome(), it.getSubtotal(), Double::sum);
+                qtdVendidaPorProduto.merge(it.getProdutoId(), it.getQuantidade(), Integer::sum);
+                receitaPorProdutoId.merge(it.getProdutoId(), it.getSubtotal(), Double::sum);
             }
         }
         req.setAttribute("receitaCategoriaJson", GraficoUtil.json(ordenar(porCategoria, 8)));
         req.setAttribute("topProdutosJson", GraficoUtil.json(ordenar(porProduto, 6)));
+        req.setAttribute("qtdVendidaPorProduto", qtdVendidaPorProduto);
+        req.setAttribute("receitaPorProdutoId", receitaPorProdutoId);
+
+        // Produto em destaque (maior receita ou primeiro produto)
+        Produto destaque = produtos.stream()
+                .max(Comparator.comparingDouble(p -> receitaPorProdutoId.getOrDefault(p.getId(), 0.0)))
+                .orElse(produtos.isEmpty() ? null : produtos.get(0));
+        req.setAttribute("produtoDestaque", destaque);
+        if (destaque != null) {
+            req.setAttribute("receitaDestaque", receitaPorProdutoId.getOrDefault(destaque.getId(), destaque.getPreco()));
+        }
+
+        // Lista de produtos ordenada para a secção Bento inferior
+        String ord = req.getParameter("ordenar");
+        List<Produto> topLista = new ArrayList<>(produtos);
+        if ("preco".equals(ord)) {
+            topLista.sort(Comparator.comparingDouble(Produto::getPreco).reversed());
+        } else if ("stock".equals(ord)) {
+            topLista.sort(Comparator.comparingInt(Produto::getQuantidade).reversed());
+        } else {
+            topLista.sort(Comparator.comparingDouble((Produto p) -> receitaPorProdutoId.getOrDefault(p.getId(), 0.0)).reversed());
+        }
+        req.setAttribute("topProdutosLista", topLista.stream().limit(6).collect(Collectors.toList()));
 
         // Produtos com menos stock
         List<Map.Entry<String, Integer>> stock = produtos.stream()

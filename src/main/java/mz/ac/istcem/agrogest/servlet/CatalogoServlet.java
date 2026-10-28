@@ -16,13 +16,42 @@ public class CatalogoServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         String cat = req.getParameter("categoria");
-        List<Produto> lista;
+        String q = req.getParameter("q");
+        String ord = req.getParameter("ordenar");
+        String termo = q == null ? "" : q.trim().toLowerCase();
+
+        List<Produto> todos;
         synchronized (DataStore.getInstance().produtos) {
-            lista = DataStore.getInstance().produtos.stream()
-                    .filter(p -> p.getQuantidade() > 0)
-                    .filter(p -> cat == null || cat.isEmpty() || p.getCategoria().equals(cat))
-                    .collect(Collectors.toList());
+            todos = new ArrayList<>(DataStore.getInstance().produtos);
         }
+
+        List<Produto> disponiveis = todos.stream()
+                .filter(p -> p.getQuantidade() > 0)
+                .collect(Collectors.toList());
+
+        Map<String, Long> contagemPorCat = disponiveis.stream()
+                .collect(Collectors.groupingBy(Produto::getCategoria, Collectors.counting()));
+        req.setAttribute("totalDisponiveis", disponiveis.size());
+        req.setAttribute("contagemPorCat", contagemPorCat);
+
+        List<Produto> lista = disponiveis.stream()
+                .filter(p -> cat == null || cat.isEmpty() || p.getCategoria().equals(cat))
+                .filter(p -> termo.isEmpty()
+                        || p.getNome().toLowerCase().contains(termo)
+                        || (p.getDescricao() != null && p.getDescricao().toLowerCase().contains(termo))
+                        || (p.getFornecedorNome() != null && p.getFornecedorNome().toLowerCase().contains(termo)))
+                .collect(Collectors.toList());
+
+        if ("preco_asc".equals(ord)) {
+            lista.sort(Comparator.comparingDouble(Produto::getPreco));
+        } else if ("preco_desc".equals(ord)) {
+            lista.sort(Comparator.comparingDouble(Produto::getPreco).reversed());
+        } else if ("stock".equals(ord)) {
+            lista.sort(Comparator.comparingInt(Produto::getQuantidade).reversed());
+        } else if ("nome".equals(ord)) {
+            lista.sort(Comparator.comparing(Produto::getNome, String.CASE_INSENSITIVE_ORDER));
+        }
+
         req.setAttribute("produtos", lista);
         req.getRequestDispatcher("/WEB-INF/views/cliente/catalogo.jsp").forward(req, resp);
     }

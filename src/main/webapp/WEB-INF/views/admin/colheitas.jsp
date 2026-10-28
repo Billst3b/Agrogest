@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <!DOCTYPE html>
@@ -8,19 +8,19 @@
 <c:set var="ativo" value="colheitas"/>
 <%@ include file="/WEB-INF/views/_partials/admin-sidebar.jspf" %>
 <main class="conteudo">
-<div class="cabecalho"><div><h2>Colheitas</h2><p>Produção registada por cultivo.</p></div></div>
+<div class="cabecalho"><div><h2>Registo de Colheitas</h2><p>Produção obtida em quilogramas (kg) e cálculo automático do valor total da safra.</p></div></div>
 <section class="painel">
-<h3>Nova colheita</h3>
+<h3>Nova Colheita</h3>
 <c:choose>
 <c:when test="${empty cultivos}"><p class="muted" style="margin:0">Registe primeiro um <a href="${ctx}/admin/cultivos">cultivo</a>.</p></c:when>
 <c:otherwise>
 <form method="post" class="form-grid">
     <input type="hidden" name="acao" value="criar">
-    <div class="campo"><label for="co-cult">Cultivo</label><select id="co-cult" name="cultivoId" required><c:forEach var="cu" items="${cultivos}"><option value="${cu.id}"><c:out value="${cu.cultura} (${cu.variedade})"/></option></c:forEach></select></div>
-    <div class="campo"><label for="co-data">Data</label><input id="co-data" type="date" name="data" required></div>
-    <div class="campo"><label for="co-kg">Quantidade (kg)</label><input id="co-kg" type="number" step="0.1" min="0" name="quantidadeKg" required></div>
-    <div class="campo"><label for="co-preco">Preço por kg (MZN)</label><input id="co-preco" type="number" step="0.01" min="0" name="precoPorKg" required></div>
-    <div class="botao-linha"><button>+ Registar colheita</button></div>
+    <div class="campo"><label for="co-cult">Cultivo Associado</label><select id="co-cult" name="cultivoId" required><c:forEach var="cu" items="${cultivos}"><option value="${cu.id}"><c:out value="${cu.cultura} — ${cu.variedade} (${cu.hectares} ha)"/></option></c:forEach></select></div>
+    <div class="campo"><label for="co-data">Data da Colheita</label><input id="co-data" type="date" name="data" required></div>
+    <div class="campo"><label for="co-kg">Quantidade Colhida (kg)</label><input id="co-kg" type="number" step="0.1" min="1" name="quantidadeKg" placeholder="Ex.: 3200" required></div>
+    <div class="campo"><label for="co-preco">Preço por kg (MZN)</label><input id="co-preco" type="number" step="0.01" min="0.1" name="precoPorKg" placeholder="Ex.: 22.00" required></div>
+    <div class="botao-linha"><button type="submit">+ Registar Colheita</button></div>
 </form>
 </c:otherwise>
 </c:choose>
@@ -28,14 +28,16 @@
 <section class="painel sem-padding">
 <c:choose>
 <c:when test="${empty colheitas}"><div class="vazio"><div class="ico"><span class="i i-cesto"></span></div><p>Nenhuma colheita registada.</p></div></c:when>
-<c:otherwise><div class="tabela-wrap">
-<table><thead><tr><th>ID</th><th>Cultivo</th><th>Data</th><th class="num">Quantidade</th><th class="num">Preço/kg</th><th class="num">Total</th></tr></thead><tbody>
+<c:otherwise>
+<div class="tabela-wrap" tabindex="0" role="region" aria-label="Colheitas registadas">
+<table><thead><tr><th>ID</th><th>Cultura / Variedade</th><th>Data</th><th class="num">Quantidade Colhida</th><th class="num">Preço / kg</th><th class="num">Valor Total Calculado</th></tr></thead><tbody>
 <c:forEach var="co" items="${colheitas}"><tr>
-<td class="id">${co.id}</td>
-<td><strong><c:forEach var="cu" items="${cultivos}"><c:if test="${cu.id == co.cultivoId}"><c:out value="${cu.cultura}"/></c:if></c:forEach></strong></td>
-<td>${co.data}</td><td class="num">${co.quantidadeKg} kg</td>
-<td class="num"><fmt:formatNumber value="${co.precoPorKg}" type="currency" currencySymbol="MZN"/></td>
-<td class="num"><strong><fmt:formatNumber value="${co.valorTotal}" type="currency" currencySymbol="MZN"/></strong></td>
+<td class="id">#${co.id}</td>
+<td><strong><c:forEach var="cu" items="${cultivos}"><c:if test="${cu.id == co.cultivoId}">🌾 <c:out value="${cu.cultura} (${cu.variedade})"/></c:if></c:forEach></strong></td>
+<td>${co.data}</td>
+<td class="num"><span class="badge aberta"><fmt:formatNumber value="${co.quantidadeKg}" maxFractionDigits="1"/> kg</span></td>
+<td class="num"><fmt:formatNumber value="${co.precoPorKg}" minFractionDigits="2" maxFractionDigits="2"/> MZN</td>
+<td class="num"><strong><fmt:formatNumber value="${co.valorTotal}" minFractionDigits="2" maxFractionDigits="2"/> MZN</strong></td>
 </tr></c:forEach></tbody></table></div></c:otherwise>
 </c:choose>
 </section>

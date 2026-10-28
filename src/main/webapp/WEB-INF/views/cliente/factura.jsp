@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <!DOCTYPE html>
@@ -9,44 +9,66 @@
 <div class="factura">
     <div class="topo">
         <div>
-            <span class="marca"><span class="logo"><span class="i i-folha"></span></span> AgroGest</span>
-            <p class="muted" style="margin:8px 0 0">Insumos e gestão agrícola</p>
+            <span class="marca"><span class="logo"><span class="i i-folha"></span></span> AgroGest, E.I.</span>
+            <p class="muted" style="margin:8px 0 2px">Comércio de Insumos e Produção Agrícola · Província de Nampula</p>
+            <p class="muted" style="margin:0; font-size:0.82rem">NUIT: 400192837 · Av. do Trabalho, Nampula · Moçambique</p>
         </div>
         <div class="numero">
-            <span class="etiqueta">Factura</span>
+            <span class="badge aberta" style="align-self:flex-end">FACTURA / RECIBO ORIGINAL</span>
             <strong>${venda.numeroFactura}</strong>
-            <span class="muted">${venda.data.toString().substring(0, 16).replace('T', ' ')}</span>
+            <span class="muted">Data: ${venda.data.toString().substring(0, 16).replace('T', ' ')}</span>
         </div>
     </div>
     <div class="dados">
         <div>
-            <div class="etiqueta">Facturado a</div>
+            <div class="etiqueta">Exmo.(a) Cliente Facturado</div>
             <p><strong><c:out value="${venda.clienteNome}"/></strong></p>
-            <p><c:out value="${venda.clienteEndereco}"/></p>
-            <p><c:out value="${venda.clienteTelefone}"/></p>
+            <p class="muted"><c:out value="${venda.clienteEndereco}"/></p>
+        </div>
+        <div style="text-align:right">
+            <div class="etiqueta">Contacto & Condições</div>
+            <p><strong><c:out value="${venda.clienteTelefone}"/></strong></p>
+            <p class="muted">Moeda: Metical (MZN) · Pronto Pagamento</p>
         </div>
     </div>
-    <table><thead><tr><th>Produto</th><th class="num">Qtd</th><th class="num">Preço unit.</th><th class="num">Subtotal</th></tr></thead>
-    <tbody>
-    <c:forEach var="i" items="${venda.itens}">
-        <tr>
-            <td><c:out value="${i.produtoNome}"/></td><td class="num">${i.quantidade}</td>
-            <td class="num"><fmt:formatNumber value="${i.precoUnitario}" type="currency" currencySymbol="MZN"/></td>
-            <td class="num"><fmt:formatNumber value="${i.subtotal}" type="currency" currencySymbol="MZN"/></td>
-        </tr>
-    </c:forEach>
-    </tbody></table>
-    <div class="totais">
-        <div class="linha"><span class="muted">Subtotal</span><span class="num"><fmt:formatNumber value="${venda.subtotal}" type="currency" currencySymbol="MZN"/></span></div>
-        <div class="linha"><span class="muted">IVA (16%)</span><span class="num"><fmt:formatNumber value="${venda.iva}" type="currency" currencySymbol="MZN"/></span></div>
-        <div class="linha total"><span>Total</span><span class="num"><fmt:formatNumber value="${venda.total}" type="currency" currencySymbol="MZN"/></span></div>
+    <div class="tabela-wrap" tabindex="0" role="region" aria-label="Itens da factura">
+        <table>
+            <thead>
+                <tr>
+                    <th>Descrição do Insumo / Produto</th>
+                    <th class="num">Qtd.</th>
+                    <th class="num">Preço Unitário</th>
+                    <th class="num">Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+            <c:forEach var="i" items="${venda.itens}">
+                <tr>
+                    <td><strong><c:out value="${i.produtoNome}"/></strong></td>
+                    <td class="num">${i.quantidade}</td>
+                    <td class="num"><fmt:formatNumber value="${i.precoUnitario}" minFractionDigits="2" maxFractionDigits="2"/> MZN</td>
+                    <td class="num"><strong><fmt:formatNumber value="${i.subtotal}" minFractionDigits="2" maxFractionDigits="2"/> MZN</strong></td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
     </div>
-    <div class="acoes">
+    <div class="totais">
+        <div class="linha"><span class="muted">Subtotal Ilíquido</span><span class="num"><fmt:formatNumber value="${venda.subtotal}" minFractionDigits="2" maxFractionDigits="2"/> MZN</span></div>
+        <div class="linha"><span class="muted">IVA (16%)</span><span class="num"><fmt:formatNumber value="${venda.iva}" minFractionDigits="2" maxFractionDigits="2"/> MZN</span></div>
+        <div class="linha total"><span>Total Geral</span><span class="num"><fmt:formatNumber value="${venda.total}" minFractionDigits="2" maxFractionDigits="2"/> MZN</span></div>
+    </div>
+    <div class="acoes" style="justify-content:space-between; border-top:1px solid rgba(255,255,255,0.1); padding-top:20px; margin-top:28px">
         <c:choose>
-            <c:when test="${sessionScope.perfil == 'ADMIN'}"><a class="botao secundario" href="${ctx}/admin/vendas">← Voltar às vendas</a></c:when>
-            <c:otherwise><a class="botao secundario" href="${ctx}/minhas-compras">← Minhas compras</a></c:otherwise>
+            <c:when test="${sessionScope.perfil == 'ADMIN'}"><a class="botao secundario" href="${ctx}/admin/vendas">← Voltar às Vendas</a></c:when>
+            <c:otherwise><a class="botao secundario" href="${ctx}/minhas-compras">← Minhas Compras</a></c:otherwise>
         </c:choose>
-        <button onclick="window.print()"><span class="i i-impressora"></span> Imprimir</button>
+        <div style="display:flex; gap:10px">
+            <c:if test="${sessionScope.perfil != 'ADMIN'}">
+                <a class="botao secundario" href="${ctx}/catalogo">Continuar a Comprar</a>
+            </c:if>
+            <button onclick="window.print()"><span class="i i-impressora"></span> Imprimir Factura (A4)</button>
+        </div>
     </div>
 </div>
 </body></html>

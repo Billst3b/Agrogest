@@ -6,12 +6,33 @@ import mz.ac.istcem.agrogest.model.*;
 import mz.ac.istcem.agrogest.repo.DataStore;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.*;
+import java.util.stream.Collectors;
+
 @WebServlet("/admin/produtos")
 public class ProdutoServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         DataStore s = DataStore.getInstance();
-        req.setAttribute("produtos", s.produtos);
+        String ord = req.getParameter("ordenar");
+        String filtro = req.getParameter("filtro");
+
+        List<Produto> lista;
+        synchronized (s.produtos) {
+            lista = new ArrayList<>(s.produtos);
+        }
+        if ("armazem".equals(filtro)) {
+            lista = lista.stream().filter(p -> p.getQuantidade() > 0).collect(Collectors.toList());
+        }
+        if ("nome".equals(ord)) {
+            lista.sort(Comparator.comparing(Produto::getNome, String.CASE_INSENSITIVE_ORDER));
+        } else if ("preco".equals(ord)) {
+            lista.sort(Comparator.comparingDouble(Produto::getPreco).reversed());
+        } else if ("stock".equals(ord)) {
+            lista.sort(Comparator.comparingInt(Produto::getQuantidade).reversed());
+        }
+
+        req.setAttribute("produtos", lista);
         req.setAttribute("fornecedores", s.fornecedores);
         req.getRequestDispatcher("/WEB-INF/views/admin/produtos.jsp").forward(req, resp);
     }

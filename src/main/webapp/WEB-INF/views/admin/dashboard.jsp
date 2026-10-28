@@ -17,8 +17,8 @@
         <p>Gestão integrada de produção agrícola, stock e facturação · Província de Nampula</p>
     </div>
     <div class="topo-acoes">
-        <a class="icone-circulo" href="${ctx}/admin/produtos" title="Pesquisar Catálogo e Stock"></a>
-        <a class="icone-circulo" href="${ctx}/admin/relatorios" title="Alertas e Relatórios"><span class="ponto-notif"></span></a>
+        <a class="icone-circulo" href="${ctx}/admin/produtos" title="Pesquisar Catálogo e Stock"><span class="i i-caixa"></span></a>
+        <a class="icone-circulo" href="${ctx}/admin/relatorios" title="Alertas e Relatórios"><span class="i i-grafico"></span><span class="ponto-notif"></span></a>
         <div class="avatar-pill">
             <span class="bolha">AG</span>
             <span><c:out value="${sessionScope.nome}"/></span>
